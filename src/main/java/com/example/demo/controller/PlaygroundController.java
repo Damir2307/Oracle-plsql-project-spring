@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.PlaygroundBookingDto;
 import com.example.demo.dto.PlaygroundDto;
+import com.example.demo.dto.PriceDto;
 import com.example.demo.enitity.Booking;
 import com.example.demo.enitity.Playground;
 import com.example.demo.enitity.Specification;
@@ -16,14 +17,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.StoredProcedureQuery;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/api/playground")
@@ -131,7 +138,7 @@ public class PlaygroundController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/bron")
     public ResponseEntity<String> bron(@RequestBody Booking booking){
         try {
             jdbcTemplate.update("INSERT INTO booking (id,brontime, bronday,bronmonth, user_id,playground_id) VALUES(booking_seq.nextval,?,?,?,?,?)",
@@ -141,6 +148,62 @@ public class PlaygroundController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/filterBySport/{sportName}")
+    public ResponseEntity<List<PlaygroundDto>> filterBySport(@PathVariable("sportName")String sportName) {
+        try {
+            List<PlaygroundDto> playgrounds = new ArrayList<PlaygroundDto>();
+            jdbcTemplate.setResultsMapCaseInsensitive(true);
+             SimpleJdbcCall simpleJdbcCallRefCursor;
 
+            simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                    .withProcedureName("filter_by_sport_p")
+                    .returningResultSet("playgrounds",
+                            BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+            SqlParameterSource paramaters = new MapSqlParameterSource()
+                    .addValue("sname", sportName);
+
+            Map out = simpleJdbcCallRefCursor.execute(paramaters);
+
+            if (out == null) {
+                playgrounds=Collections.emptyList();
+            } else {
+                playgrounds=(List) out.get("playgrounds");
+            }
+            if (playgrounds.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(playgrounds, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/filterByPrice/{price}")
+    public ResponseEntity<List<PlaygroundDto>> filterByPrice(@PathVariable("price")int price) {
+        try {
+            List<PlaygroundDto> playgrounds = new ArrayList<PlaygroundDto>();
+            jdbcTemplate.setResultsMapCaseInsensitive(true);
+            SimpleJdbcCall simpleJdbcCallRefCursor;
+
+            simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                    .withProcedureName("filter_by_price_p")
+                    .returningResultSet("playgrounds",
+                            BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+            MapSqlParameterSource paramaters = new MapSqlParameterSource();
+            paramaters.addValue("n1",price);
+
+            Map out = simpleJdbcCallRefCursor.execute(paramaters);
+            if (out == null) {
+                playgrounds=Collections.emptyList();
+            } else {
+                playgrounds=(List) out.get("playgrounds");
+            }
+            if (playgrounds.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(playgrounds, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
