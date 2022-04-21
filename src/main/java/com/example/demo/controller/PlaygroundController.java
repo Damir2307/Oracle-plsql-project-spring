@@ -93,7 +93,7 @@ public class PlaygroundController {
             PlaygroundDto playground = jdbcTemplate.queryForObject("SELECT * FROM playground WHERE id=?",
                     BeanPropertyRowMapper.newInstance(PlaygroundDto.class), id);
             PlaygroundBookingDto playgroundBookingDto=new PlaygroundBookingDto();
-            playgroundBookingDto.setId(playground.getId());
+            playgroundBookingDto.setId(id);
             playgroundBookingDto.setPlaygroundAddress(playground.getPlaygroundAddress());
             playgroundBookingDto.setPlaygroundName(playground.getPlaygroundName());
             playgroundBookingDto.setDescription(playground.getDescription());
@@ -101,8 +101,28 @@ public class PlaygroundController {
             playgroundBookingDto.setStartTime(playground.getStartTime());
             playgroundBookingDto.setPhone(playground.getPhone());
             playgroundBookingDto.setPrice(playground.getPrice());
-            List<Booking> bookingList=jdbcTemplate.query("SELECT * FROM booking inner join playground on booking.playground_id=playground.id WHERE booking.playground_id=?",
+            List<Booking> bookingList=jdbcTemplate.query("SELECT user_id,playground_id,brontime,bronday,bronmonth FROM booking inner join playground on booking.playground_id=playground.id WHERE booking.playground_id=?",
                     BeanPropertyRowMapper.newInstance(Booking.class), id);
+
+//            List<Booking> bookingList=new ArrayList<Booking>();
+//            jdbcTemplate.setResultsMapCaseInsensitive(true);
+//            SimpleJdbcCall simpleJdbcCallRefCursor;
+//
+//            simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+//                    .withProcedureName("select_brons_by_playground")
+//                    .returningResultSet("brons",
+//                            BeanPropertyRowMapper.newInstance(Booking.class));
+//            SqlParameterSource paramaters = new MapSqlParameterSource()
+//                    .addValue("p_id", id);
+//
+//            Map out = simpleJdbcCallRefCursor.execute(paramaters);
+//
+//            if (out == null) {
+//                bookingList=Collections.emptyList();
+//            } else {
+//                bookingList=(List) out.get("brons");
+//            }
+
             playgroundBookingDto.setBookingList(bookingList);
             Specification specification = jdbcTemplate.queryForObject("SELECT * FROM specification inner join playground on specification.id=playground.specification_id WHERE specification.id=?",
                     BeanPropertyRowMapper.newInstance(Specification.class), playground.getSpecificationId());
@@ -128,7 +148,21 @@ public class PlaygroundController {
     public ResponseEntity<List<PlaygroundDto>> getAllPLaygrounds() {
         try {
             List<PlaygroundDto> playgrounds = new ArrayList<PlaygroundDto>();
-            playgrounds=jdbcTemplate.query("SELECT * from playground", BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+            jdbcTemplate.setResultsMapCaseInsensitive(true);
+            SimpleJdbcCall simpleJdbcCallRefCursor;
+
+            simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                    .withProcedureName("select_all_playground")
+                    .returningResultSet("playgrounds",
+                            BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+
+            Map out = simpleJdbcCallRefCursor.execute();
+
+            if (out == null) {
+                playgrounds=Collections.emptyList();
+            } else {
+                playgrounds=(List) out.get("playgrounds");
+            }
             if (playgrounds.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -136,6 +170,16 @@ public class PlaygroundController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+//        try {
+//            List<PlaygroundDto> playgrounds = new ArrayList<PlaygroundDto>();
+//            playgrounds=jdbcTemplate.query("SELECT * from playground", BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+//            if (playgrounds.isEmpty()) {
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            }
+//            return new ResponseEntity<>(playgrounds, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
     }
 
     @PostMapping("/bron")

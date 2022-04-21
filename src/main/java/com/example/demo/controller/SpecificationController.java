@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.enitity.Specification;
-import com.example.demo.enitity.Sport;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
