@@ -28,30 +28,31 @@
         </div>
     </header>
     <section class="container">
+        <form action="/filterByPrice">
         <div class="filter">
             <div class="filter_title">
                 <h2>Фильтр</h2>
             </div>
-
             <div class="filter_name filter_price_">
                 <p>Цена, тг </p>
                 <div class="filter_sub">
                     <p>до</p>
-                    <input type="text" class="price-input">
+                    <input type="text" name="price" class="price-input">
                 </div>
 
             </div>
 
             <div class="filter_button">
-                <button>Найти</button>
+                <button type="submit">Найти</button>
             </div>
         </div>
+        </form>
         <div class="playgrounds">
             <input type="text" placeholder="Алматы арена" class="search_input">
             <div class="list_playgrounds">
                 <c:forEach var="playground" items="${ListPlaygrounds}">
                 <div class="playground_card">
-                    <div class="playground_card_photo"></div>
+                    <div class="playground_card_photo" style="background-image: url(${playground.getUrl()});"></div>
                     <div class="playground_card_info">
                         <div class="playground_card_info_title">
                             <h2><c:out value="${playground.getPlaygroundName()}" /></h2>
@@ -75,7 +76,11 @@
                             <p><c:out value="${playground.getPrice()}" /> т <slot class="price-info">/час</slot> </p>
                         </div>
                         <div class="playground_more_info">
-                            <button><h2>Подробнее</h2></button>
+                            <form action="/playgroundDetails">
+                                <input type="hidden" name="id" value="<c:out value="${playground.getId()}" />">
+                                <input type="hidden" name="sportName" value="<c:out value="${playground.getSportName()}" />">
+                                <button><h2>Подробнее</h2></button>
+                            </form>
                         </div>
                     </div>
                 </div>

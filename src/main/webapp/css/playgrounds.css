@@ -59,7 +59,7 @@ section.container {
     background: #FFFFFF;
     border-radius: 17px;
     width: 242px;
-    height: 565px;
+    height: 325px;
     margin-right: 5vw;
     display: flex;
     /* justify-content: flex-start; */
@@ -184,7 +184,6 @@ section.container {
     width: 30%;
     height: 80%;
     border-radius:30px;
-    background-image: url('../img/playground1.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

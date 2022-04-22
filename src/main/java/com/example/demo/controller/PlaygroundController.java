@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.PSdto;
 import com.example.demo.dto.PlaygroundBookingDto;
 import com.example.demo.dto.PlaygroundDto;
 import com.example.demo.enitity.Booking;
@@ -144,9 +145,9 @@ public class PlaygroundController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<PlaygroundDto>> getAllPLaygrounds() {
+    public ResponseEntity<List<PSdto>> getAllPLaygrounds() {
         try {
-            List<PlaygroundDto> playgrounds = new ArrayList<PlaygroundDto>();
+            List<PSdto> playgrounds = new ArrayList<PSdto>();
             jdbcTemplate.setResultsMapCaseInsensitive(true);
             SimpleJdbcCall simpleJdbcCallRefCursor;
 
@@ -154,7 +155,7 @@ public class PlaygroundController {
                     .withCatalogName("playground_actions")
                     .withProcedureName("select_all_playground")
                     .returningResultSet("playgrounds",
-                            BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+                            BeanPropertyRowMapper.newInstance(PSdto.class));
 
             Map out = simpleJdbcCallRefCursor.execute();
 
@@ -193,9 +194,9 @@ public class PlaygroundController {
         }
     }
     @GetMapping("/filterBySport/{sportName}")
-    public ResponseEntity<List<PlaygroundDto>> filterBySport(@PathVariable("sportName")String sportName) {
+    public ResponseEntity<List<PSdto>> filterBySport(@PathVariable("sportName")String sportName) {
         try {
-            List<PlaygroundDto> playgrounds = new ArrayList<PlaygroundDto>();
+            List<PSdto> playgrounds = new ArrayList<PSdto>();
             jdbcTemplate.setResultsMapCaseInsensitive(true);
              SimpleJdbcCall simpleJdbcCallRefCursor;
 
@@ -203,7 +204,7 @@ public class PlaygroundController {
                     .withCatalogName("filter_actions")
                     .withProcedureName("filter_by_sport_p")
                     .returningResultSet("playgrounds",
-                            BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+                            BeanPropertyRowMapper.newInstance(PSdto.class));
             SqlParameterSource paramaters = new MapSqlParameterSource()
                     .addValue("sname", sportName);
 
@@ -223,9 +224,9 @@ public class PlaygroundController {
         }
     }
     @GetMapping("/filterByPrice/{price}")
-    public ResponseEntity<List<PlaygroundDto>> filterByPrice(@PathVariable("price")int price) {
+    public ResponseEntity<List<PSdto>> filterByPrice(@PathVariable("price")int price) {
         try {
-            List<PlaygroundDto> playgrounds = new ArrayList<PlaygroundDto>();
+            List<PSdto> playgrounds = new ArrayList<PSdto>();
             jdbcTemplate.setResultsMapCaseInsensitive(true);
             SimpleJdbcCall simpleJdbcCallRefCursor;
 
@@ -233,7 +234,7 @@ public class PlaygroundController {
                     .withCatalogName("filter_actions")
                     .withProcedureName("filter_by_price_p")
                     .returningResultSet("playgrounds",
-                            BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
+                            BeanPropertyRowMapper.newInstance(PSdto.class));
             MapSqlParameterSource paramaters = new MapSqlParameterSource();
             paramaters.addValue("n1",price);
 

@@ -22,7 +22,6 @@
             </div>
             <ul>
                 <li>Спорт площадки</li>
-                <li>Добавить площадку</li>
                 <li>Войти</li>
             </ul>
         </div>
@@ -32,7 +31,7 @@
             <div class="hero_text_div">
                 <h1 class="hero_title">Аренда <span class=""><img src="./img/hero_circle.png" alt=""></span> площадок</h1>
                 <p class="hero_subtitle">Занимайтесь спортом вместе с нами</p>
-                <button class="hero_button">Забронировать</button>
+                <a href="/playgrounds" class="hero_button">Забронировать</a>
             </div>
         </div>
         <div class="hero_img">
@@ -47,11 +46,11 @@
                         <img src="./img/basketball.png" alt="">
                         <div class="shadow"></div>
                     </div>
-                    <p class="sportType_card_title">Футбольные площадки</p>
+                    <p class="sportType_card_title">Баскетбольные площадки</p>
                     <p class="sportType_card_price"><span>oт</span><span>3500 т</span></p>
-                    <button class="sportType_card_viewButton">
+                    <a href="/filterBasketball" class="sportType_card_viewButton">
                         Посмотреть
-                    </button>
+                    </a>
                 </div>
             </div>
             <div class="sportType_card">
@@ -62,7 +61,7 @@
                     </div>
                     <p class="sportType_card_title">Футбольные площадки</p>
                     <p class="sportType_card_price"><span>oт</span><span>3500 т</span></p>
-                    <a href="/playgrounds" class="sportType_card_viewButton">
+                    <a href="/filterFootball" class="sportType_card_viewButton">
                         Посмотреть
                     </a>
                 </div>
@@ -73,11 +72,11 @@
                         <img src="./img/volleyball.png" alt="">
                         <div class="shadow"></div>
                     </div>
-                    <p class="sportType_card_title">Футбольные площадки</p>
+                    <p class="sportType_card_title">Волейбольные площадки</p>
                     <p class="sportType_card_price"><span>oт</span><span>3500 т</span></p>
-                    <button class="sportType_card_viewButton">
+                    <a href="/filterVolleyball" class="sportType_card_viewButton">
                         Посмотреть
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -103,7 +102,7 @@
                             <p class="playground_name"><c:out value="${playground.getPlaygroundName()}" /></p>
                             <p class="playground_address"><c:out value="${playground.getPlaygroundAddress()}" /></p>
                             <p class="playground_price"><c:out value="${playground.getPrice()}" /> т/час</p>
-                            <a href="productDetail.html" class="playground_card_button">
+                            <a href="/playgrounds" class="playground_card_button">
                                 ЗАБРОНИРОВАЬ СЕЙЧАС
                             </a>
                         </div>

@@ -253,9 +253,8 @@ section.container {
 
 /*Schedule*/
 .calendar {
-    height: 100%;
+    height: 135%;
     background: #00202A;
-    margin-bottom: 50px;
     padding-bottom: 50px;
     display: flex;
     justify-content: center;
