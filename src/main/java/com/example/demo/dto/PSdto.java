@@ -5,7 +5,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class PlaygroundDto {
+public class PSdto {
     private Long id;
     private String playgroundName;
 
@@ -27,4 +27,6 @@ public class PlaygroundDto {
     private Long sportId;
 
     private Long specificationId;
+
+    private String sportName;
 }

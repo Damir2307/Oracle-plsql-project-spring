@@ -2,11 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.PlaygroundBookingDto;
 import com.example.demo.dto.PlaygroundDto;
-import com.example.demo.dto.PriceDto;
 import com.example.demo.enitity.Booking;
 import com.example.demo.enitity.Playground;
 import com.example.demo.enitity.Specification;
-import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +21,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.StoredProcedureQuery;
 import javax.sql.DataSource;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -37,7 +34,7 @@ import java.util.Map;
 @AllArgsConstructor
 public class PlaygroundController {
     private final String deleteRow="DELETE FROM PLAYGROUND WHERE id=?";
-    private final String insertRow= "INSERT INTO playground(id,playground_name,playground_address,price,starttime,closetime,description,phone,sport_id,specification_id) VALUES(playground_seq.nextval,?,?,?,?,?,?,?,?,?)";
+    private final String insertRow= "INSERT INTO playground(id,playground_name,playground_address,price,starttime,closetime,description,phone,sport_id,specification_id,url) VALUES(playground_seq.nextval,?,?,?,?,?,?,?,?,?,?)";
     @Autowired
     @Qualifier("oracleConn")
     public final DataSource mainDataSource;
@@ -63,6 +60,7 @@ public class PlaygroundController {
                     myStmt.setString(7, playground.getPhone());
                     myStmt.setLong(8, playground.getSportId());
                     myStmt.setLong(9, playground.getSpecificationId());
+                    myStmt.setString(10,playground.getUrl());
 
                     return myStmt.execute();
                 }});
@@ -71,7 +69,6 @@ public class PlaygroundController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @ApiOperation(value = "Delete task",notes = "Delete task")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id){
         try {
@@ -101,30 +98,32 @@ public class PlaygroundController {
             playgroundBookingDto.setStartTime(playground.getStartTime());
             playgroundBookingDto.setPhone(playground.getPhone());
             playgroundBookingDto.setPrice(playground.getPrice());
-            List<Booking> bookingList=jdbcTemplate.query("SELECT user_id,playground_id,brontime,bronday,bronmonth FROM booking inner join playground on booking.playground_id=playground.id WHERE booking.playground_id=?",
-                    BeanPropertyRowMapper.newInstance(Booking.class), id);
+            playgroundBookingDto.setUrl(playground.getUrl());
+//            List<Booking> bookingList=jdbcTemplate.query("SELECT user_id,playground_id,brontime,bronday,bronmonth FROM booking inner join playground on booking.playground_id=playground.id WHERE booking.playground_id=?",
+//                    BeanPropertyRowMapper.newInstance(Booking.class), id);
 
-//            List<Booking> bookingList=new ArrayList<Booking>();
-//            jdbcTemplate.setResultsMapCaseInsensitive(true);
-//            SimpleJdbcCall simpleJdbcCallRefCursor;
-//
-//            simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
-//                    .withProcedureName("select_brons_by_playground")
-//                    .returningResultSet("brons",
-//                            BeanPropertyRowMapper.newInstance(Booking.class));
-//            SqlParameterSource paramaters = new MapSqlParameterSource()
-//                    .addValue("p_id", id);
-//
-//            Map out = simpleJdbcCallRefCursor.execute(paramaters);
-//
-//            if (out == null) {
-//                bookingList=Collections.emptyList();
-//            } else {
-//                bookingList=(List) out.get("brons");
-//            }
+            List<Booking> bookingList=new ArrayList<Booking>();
+            jdbcTemplate.setResultsMapCaseInsensitive(true);
+            SimpleJdbcCall simpleJdbcCallRefCursor;
+
+            simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                    .withCatalogName("booking_actions")
+                    .withProcedureName("select_brons_by_playground")
+                    .returningResultSet("brons",
+                            BeanPropertyRowMapper.newInstance(Booking.class));
+            SqlParameterSource paramaters = new MapSqlParameterSource()
+                    .addValue("p_id", id);
+
+            Map out = simpleJdbcCallRefCursor.execute(paramaters);
+
+            if (out == null) {
+                bookingList=Collections.emptyList();
+            } else {
+                bookingList=(List) out.get("brons");
+            }
 
             playgroundBookingDto.setBookingList(bookingList);
-            Specification specification = jdbcTemplate.queryForObject("SELECT * FROM specification inner join playground on specification.id=playground.specification_id WHERE specification.id=?",
+            Specification specification = jdbcTemplate.queryForObject("SELECT WIDTH,HEIGHT,COVER,ROOFTYPE,SHOWER,DRESSINGROOM,PARKING,TRIBUNE FROM specification WHERE id=?",
                     BeanPropertyRowMapper.newInstance(Specification.class), playground.getSpecificationId());
             playgroundBookingDto.setCover(specification.getCover());
             playgroundBookingDto.setHeight(specification.getHeight());
@@ -134,7 +133,7 @@ public class PlaygroundController {
             playgroundBookingDto.setShower(specification.getShower()==1 ? true:false);
             playgroundBookingDto.setTribune(specification.getTribune()==1 ? true:false);
             playgroundBookingDto.setDressingRoom(specification.getDressingRoom()==1 ? true:false);
-            if (playground != null) {
+            if (playgroundBookingDto != null) {
                 return new ResponseEntity<>(playgroundBookingDto, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -152,6 +151,7 @@ public class PlaygroundController {
             SimpleJdbcCall simpleJdbcCallRefCursor;
 
             simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                    .withCatalogName("playground_actions")
                     .withProcedureName("select_all_playground")
                     .returningResultSet("playgrounds",
                             BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
@@ -200,6 +200,7 @@ public class PlaygroundController {
              SimpleJdbcCall simpleJdbcCallRefCursor;
 
             simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                    .withCatalogName("filter_actions")
                     .withProcedureName("filter_by_sport_p")
                     .returningResultSet("playgrounds",
                             BeanPropertyRowMapper.newInstance(PlaygroundDto.class));
@@ -229,6 +230,7 @@ public class PlaygroundController {
             SimpleJdbcCall simpleJdbcCallRefCursor;
 
             simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                    .withCatalogName("filter_actions")
                     .withProcedureName("filter_by_price_p")
                     .returningResultSet("playgrounds",
                             BeanPropertyRowMapper.newInstance(PlaygroundDto.class));

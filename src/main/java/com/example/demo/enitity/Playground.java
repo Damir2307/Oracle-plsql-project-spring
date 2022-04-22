@@ -20,6 +20,8 @@ public class Playground {
 
     private Long sportId;
 
+    private String url;
+
 
     public Playground(String playgroundName, String playgroundAddress, int price, Integer startTime, Integer closeTime, String description, String phone, Long sportId, Long specificationId) {
         this.playgroundName = playgroundName;

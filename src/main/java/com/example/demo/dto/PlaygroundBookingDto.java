@@ -21,6 +21,8 @@ public class PlaygroundBookingDto {
 
     private String description;
 
+    private String url;
+
     private String phone;
 
     private List<Booking> bookingList;
