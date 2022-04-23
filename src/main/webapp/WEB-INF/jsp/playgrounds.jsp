@@ -21,9 +21,11 @@
                 <img src="./img/burger.svg" alt="">
             </div>
             <ul>
-                <li>Спорт площадки</li>
-                <li>Добавить площадку</li>
-                <li>Войти</li>
+                <%if (session.getAttribute("user") != null) {%>
+                <a href="/logout" style="text-decoration: none; color: #00AADE;"><li>Выйти</li></a>
+                <%}else{%>
+                <a href="/login" style="text-decoration: none; color: #00AADE;"><li>Войти</li></a>
+                <%}%>
             </ul>
         </div>
     </header>
@@ -48,7 +50,7 @@
         </div>
         </form>
         <div class="playgrounds">
-            <input type="text" placeholder="Алматы арена" class="search_input">
+            <h1 style="font-size: 30px;">Список спорт площадок</h1>
             <div class="list_playgrounds">
                 <c:forEach var="playground" items="${ListPlaygrounds}">
                 <div class="playground_card">
@@ -65,7 +67,7 @@
                             <img src="img/football-field 1.png" alt="">
                             <p class="playground_type"><c:out value="${playground.getSportName()}" /></p>
                             <hr class="seperator">
-                            <p class="playground_info">Крытая площадка</p>
+                            <p class="playground_info"><c:out value="${playground.getPhone()}" /></p>
                         </div>
                         <div class="playground_card_info_subtitle">
                             <img src="img/star.png" alt="">

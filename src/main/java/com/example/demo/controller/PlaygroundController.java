@@ -124,12 +124,10 @@ public class PlaygroundController {
             }
 
             playgroundBookingDto.setBookingList(bookingList);
-            Specification specification = jdbcTemplate.queryForObject("SELECT WIDTH,HEIGHT,COVER,ROOFTYPE,SHOWER,DRESSINGROOM,PARKING,TRIBUNE FROM specification WHERE id=?",
+            Specification specification = jdbcTemplate.queryForObject("SELECT COVER,ROOFTYPE,SHOWER,DRESSINGROOM,PARKING,TRIBUNE FROM specification WHERE id=?",
                     BeanPropertyRowMapper.newInstance(Specification.class), playground.getSpecificationId());
             playgroundBookingDto.setCover(specification.getCover());
-            playgroundBookingDto.setHeight(specification.getHeight());
             playgroundBookingDto.setRoofType(specification.getRoofType());
-            playgroundBookingDto.setWidth(specification.getWidth());
             playgroundBookingDto.setParking(specification.getParking()==1 ? true:false);
             playgroundBookingDto.setShower(specification.getShower()==1 ? true:false);
             playgroundBookingDto.setTribune(specification.getTribune()==1 ? true:false);
@@ -252,5 +250,7 @@ public class PlaygroundController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 
 }

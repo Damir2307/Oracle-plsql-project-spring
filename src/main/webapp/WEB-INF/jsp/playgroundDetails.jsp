@@ -16,7 +16,7 @@
 <body>
 <div class="main">
     <header>
-        <a href="index.html" class="logo">
+        <a href="/" class="logo">
             <img src="./img/Logo.png" alt="">
         </a>
         <div class="menu">
@@ -24,9 +24,12 @@
                 <img src="./img/burger.svg" alt="">
             </div>
             <ul>
-                <li>Спорт площадки</li>
-                <li>Добавить площадку</li>
-                <li>Войти</li>
+                <a href="/playgrounds" style="text-decoration: none; color: #00AADE;"><li>Спорт площадки</li></a>
+                <%if (session.getAttribute("user") != null) {%>
+                <a href="/logout" style="text-decoration: none; color: #00AADE;"><li>Выйти</li></a>
+                <%}else{%>
+                <a href="/login" style="text-decoration: none; color: #00AADE;"><li>Войти</li></a>
+                <%}%>
             </ul>
         </div>
     </header>
@@ -51,7 +54,7 @@
                         <div class="services">
                             <div class="service">
                                 <div class="service_info">
-                                    <img src="./img/placeholder1.png" alt="">
+                                    <img src="./img/shower.png" alt="">
                                     <p class="service_text">Душ</p>
                                 </div>
                                 <div class="status">
@@ -67,7 +70,7 @@
 
                             <div class="service">
                                 <div class="service_info">
-                                    <img src="./img/placeholder1.png" alt="">
+                                    <img src="./img/changing-room.png" alt="">
                                     <p class="service_text">Раздевалка</p>
                                 </div>
                                 <div class="status">
@@ -82,7 +85,7 @@
 
                             <div class="service">
                                 <div class="service_info">
-                                    <img src="./img/placeholder1.png" alt="">
+                                    <img src="./img/tribune.png" alt="">
                                     <p class="service_text">Трибуна</p>
                                 </div>
                                 <div class="status">
@@ -97,7 +100,7 @@
 
                             <div class="service">
                                 <div class="service_info">
-                                    <img src="./img/placeholder1.png" alt="">
+                                    <img src="./img/parking.png" alt="">
                                     <p class="service_text">Парковка</p>
                                 </div>
                                 <div class="status">
@@ -112,8 +115,8 @@
 
                             <div class="service">
                                 <div class="service_info">
-                                    <img src="./img/football-field%201.svg" alt="">
-                                    <p class="service_text"><c:out value="${playgroundDetails.getWidth()}" />м х <c:out value="${playgroundDetails.getHeight()}" />м</p>
+                                    <img src="./img/phone.png" alt="">
+                                    <p class="service_text"><c:out value="${playgroundDetails.getPhone()}" /></p>
                                 </div>
                             </div>
 

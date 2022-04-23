@@ -21,8 +21,12 @@
                 <img src="./img/burger.svg" alt="">
             </div>
             <ul>
-                <li>Спорт площадки</li>
-                <li>Войти</li>
+                <a href="/playgrounds" style="text-decoration: none; color: white;"><li>Спорт площадки</li></a>
+                <%if (session.getAttribute("user") != null) {%>
+                <a href="/logout" style="text-decoration: none; color:white;"><li>Выйти</li></a>
+                <%}else{%>
+                <a href="/login" style="text-decoration: none; color:white;"><li>Войти</li></a>
+                <%}%>
             </ul>
         </div>
     </header>
@@ -47,7 +51,7 @@
                         <div class="shadow"></div>
                     </div>
                     <p class="sportType_card_title">Баскетбольные площадки</p>
-                    <p class="sportType_card_price"><span>oт</span><span>3500 т</span></p>
+                    <p class="sportType_card_price"><span>oт</span><span>2000 т</span></p>
                     <a href="/filterBasketball" class="sportType_card_viewButton">
                         Посмотреть
                     </a>
@@ -60,7 +64,7 @@
                         <div class="shadow"></div>
                     </div>
                     <p class="sportType_card_title">Футбольные площадки</p>
-                    <p class="sportType_card_price"><span>oт</span><span>3500 т</span></p>
+                    <p class="sportType_card_price"><span>oт</span><span>3000 т</span></p>
                     <a href="/filterFootball" class="sportType_card_viewButton">
                         Посмотреть
                     </a>
@@ -73,7 +77,7 @@
                         <div class="shadow"></div>
                     </div>
                     <p class="sportType_card_title">Волейбольные площадки</p>
-                    <p class="sportType_card_price"><span>oт</span><span>3500 т</span></p>
+                    <p class="sportType_card_price"><span>oт</span><span>8000 т</span></p>
                     <a href="/filterVolleyball" class="sportType_card_viewButton">
                         Посмотреть
                     </a>
@@ -109,6 +113,11 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
                     </c:if>
                 </c:forEach>
+            </div>
+            <a href="/playgrounds" class="show_all_playgrounds">
+                Показать все площадки
+            </a>
+        </div>
     </section>
     <section class="aboutUs">
         <div class="about_img">

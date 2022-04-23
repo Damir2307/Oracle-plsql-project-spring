@@ -24,7 +24,7 @@ import java.sql.SQLException;
 @RequestMapping("/v1/api/specification")
 @AllArgsConstructor
 public class SpecificationController {
-    private final String specificationInsert="INSERT INTO specification(id,cover,rooftype,width,height,shower,dressingroom,parking,tribune) VALUES(specification_seq.nextval,?,?,?,?,?,?,?,?)";
+    private final String specificationInsert="INSERT INTO specification(id,cover,rooftype,shower,dressingroom,parking,tribune) VALUES(specification_seq.nextval,?,?,?,?,?,?)";
     @Autowired
     @Qualifier("oracleConn")
     public final DataSource mainDataSource;
@@ -45,12 +45,10 @@ public class SpecificationController {
 
                     myStmt.setString(1, specification.getCover());
                     myStmt.setString(2, specification.getRoofType());
-                    myStmt.setInt(3, specification.getWidth());
-                    myStmt.setInt(4, specification.getHeight());
-                    myStmt.setInt(5, specification.getShower());
-                    myStmt.setInt(6, specification.getDressingRoom());
-                    myStmt.setInt(7, specification.getParking());
-                    myStmt.setInt(8, specification.getTribune());
+                    myStmt.setInt(3, specification.getShower());
+                    myStmt.setInt(4, specification.getDressingRoom());
+                    myStmt.setInt(5, specification.getParking());
+                    myStmt.setInt(6, specification.getTribune());
 
                     return myStmt.execute();
                 }});

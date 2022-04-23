@@ -242,7 +242,7 @@ h1 {
 .playgrounds {
     margin-top: 90px;
     background: #00202A;
-    height: 100%;
+    height: 115%;
 }
 .playgrounds_div {
     width: 90%;
@@ -358,6 +358,7 @@ h1 {
     color: #FFFFFF;
     padding: 1.2rem;
     margin-left: 100px;
+    text-decoration: none;
     /* or 24px */
 
     letter-spacing: 0.205em;
