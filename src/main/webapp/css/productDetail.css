@@ -253,7 +253,7 @@ section.container {
 
 /*Schedule*/
 .calendar {
-    height: 135%;
+    height: 110%;
     background: #00202A;
     padding-bottom: 50px;
     display: flex;
@@ -309,6 +309,31 @@ table tbody tr td{
     box-sizing: border-box;
     border-radius: 15px;
     color: #00AADE;
+}
+.brn{
+    box-sizing: border-box;
+    border-radius: 15px;
+    color: white;
+    width: 80%;
+    margin: 0 auto;
+    padding: 12px;
+    cursor: pointer;
+    background-color:#00202A;
+    font-size: 22px;
+    border: 0px solid #00AADE;
+    font-weight: bold;
+}
+.brn:hover{
+    border: 2px solid #00AADE;
+    box-sizing: border-box;
+    border-radius: 15px;
+    color: #00AADE;
+    width: 80%;
+    margin: 0 auto;
+    padding: 12px;
+    cursor: pointer;
+    background-color:#00202A;
+    font-size: 21px;
 }
 .tablePrice.disabled {
     color: #00475D;

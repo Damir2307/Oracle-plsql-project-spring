@@ -247,6 +247,7 @@ public class MainController {
         model.put("date", arr);
         model.put("playgroundDetails", playgroundBookingDto);
         model.put("sportName", sportName);
+        model.put("bookingList",bookingList);
         return "playgroundDetails";
     }
 
@@ -336,6 +337,102 @@ public class MainController {
         HttpSession session = request.getSession();
         session.setAttribute("user",null);
         return "login";
+    }
+
+    @GetMapping("/search")
+    public String search(HttpServletRequest request, ModelMap model) {
+        String search = request.getParameter("search");
+        List<PSdto> playgrounds = new ArrayList<PSdto>();
+        jdbcTemplate.setResultsMapCaseInsensitive(true);
+        SimpleJdbcCall simpleJdbcCallRefCursor;
+
+        simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                .withCatalogName("filter_actions")
+                .withProcedureName("searchPlayground")
+                .returningResultSet("playgrounds",
+                        BeanPropertyRowMapper.newInstance(PSdto.class));
+        MapSqlParameterSource paramaters = new MapSqlParameterSource();
+        paramaters.addValue("p_search", search);
+
+        Map out = simpleJdbcCallRefCursor.execute(paramaters);
+        if (out == null) {
+            playgrounds = Collections.emptyList();
+        } else {
+            playgrounds = (List) out.get("playgrounds");
+        }
+        model.put("ListPlaygrounds", playgrounds);
+        return "playgrounds";
+    }
+
+    @GetMapping("/booking")
+    public String booking(HttpServletRequest request, ModelMap model) {
+        String m_id = request.getParameter("id");
+        Long id = Long.parseLong(m_id);
+        String m_time = request.getParameter("time");
+        m_time=m_time.replaceAll("\\s", "");
+        int time = Integer.parseInt(m_time);
+        String m_month = request.getParameter("month");
+        m_month=m_month.replaceAll("\\s", "");
+        int month = Integer.parseInt(m_month);
+        String m_day = request.getParameter("day");
+        m_day=m_day.replaceAll("\\s", "");
+        int day = Integer.parseInt(m_day);
+
+        jdbcTemplate.update("INSERT INTO booking (id,brontime, bronday,bronmonth, user_id,playground_id) VALUES(booking_seq.nextval,?,?,?,?,?)",
+                new Object[] {time,day,month,1,id});
+        PlaygroundDto playground = jdbcTemplate.queryForObject("SELECT * FROM playground WHERE id=?",
+                BeanPropertyRowMapper.newInstance(PlaygroundDto.class), id);
+        PlaygroundBookingDto playgroundBookingDto = new PlaygroundBookingDto();
+        playgroundBookingDto.setId(id);
+        playgroundBookingDto.setPlaygroundAddress(playground.getPlaygroundAddress());
+        playgroundBookingDto.setPlaygroundName(playground.getPlaygroundName());
+        playgroundBookingDto.setDescription(playground.getDescription());
+        playgroundBookingDto.setCloseTime(playground.getCloseTime());
+        playgroundBookingDto.setStartTime(playground.getStartTime());
+        playgroundBookingDto.setPhone(playground.getPhone());
+        playgroundBookingDto.setPrice(playground.getPrice());
+        playgroundBookingDto.setUrl(playground.getUrl());
+        List<Booking> bookingList = new ArrayList<Booking>();
+        jdbcTemplate.setResultsMapCaseInsensitive(true);
+        SimpleJdbcCall simpleJdbcCallRefCursor;
+
+        simpleJdbcCallRefCursor = new SimpleJdbcCall(jdbcTemplate)
+                .withCatalogName("booking_actions")
+                .withProcedureName("select_brons_by_playground")
+                .returningResultSet("brons",
+                        BeanPropertyRowMapper.newInstance(Booking.class));
+        SqlParameterSource paramaters = new MapSqlParameterSource()
+                .addValue("p_id", id);
+
+        Map out = simpleJdbcCallRefCursor.execute(paramaters);
+
+        if (out == null) {
+            bookingList = Collections.emptyList();
+        } else {
+            bookingList = (List) out.get("brons");
+        }
+
+        playgroundBookingDto.setBookingList(bookingList);
+        Specification specification = jdbcTemplate.queryForObject("SELECT COVER,ROOFTYPE,SHOWER,DRESSINGROOM,PARKING,TRIBUNE FROM specification WHERE id=?",
+                BeanPropertyRowMapper.newInstance(Specification.class), playground.getSpecificationId());
+        playgroundBookingDto.setCover(specification.getCover());
+        playgroundBookingDto.setRoofType(specification.getRoofType());
+        playgroundBookingDto.setParking(specification.getParking() == 1 ? true : false);
+        playgroundBookingDto.setShower(specification.getShower() == 1 ? true : false);
+        playgroundBookingDto.setTribune(specification.getTribune() == 1 ? true : false);
+        playgroundBookingDto.setDressingRoom(specification.getDressingRoom() == 1 ? true : false);
+
+        Calendar calendar = new GregorianCalendar();
+        Date[] arr = new Date[7];
+        for (int i = 0; i < 7; i++) {
+            arr[i] = calendar.getTime();
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        model.put("date", arr);
+        model.put("playgroundDetails", playgroundBookingDto);
+        model.put("sportName", "Футбол");
+        model.put("bookingList",bookingList);
+        return "playgroundDetails";
     }
 
 }

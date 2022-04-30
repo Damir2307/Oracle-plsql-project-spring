@@ -33,7 +33,7 @@
         <form action="/filterByPrice">
         <div class="filter">
             <div class="filter_title">
-                <h2>Фильтр</h2>
+                <h2 style="color: #00AADE;">Фильтр</h2>
             </div>
             <div class="filter_name filter_price_">
                 <p>Цена, тг </p>
@@ -50,7 +50,11 @@
         </div>
         </form>
         <div class="playgrounds">
-            <h1 style="font-size: 30px;">Список спорт площадок</h1>
+            <h1 style="font-size: 30px;" class="anau">Список спортивных площадок</h1>
+            <form action="/search">
+                <input type="text" placeholder="Алматы арена"  name="search" class="search_input">
+                <input type="submit" style="position: absolute; left: -9999px"/>
+            </form>
             <div class="list_playgrounds">
                 <c:forEach var="playground" items="${ListPlaygrounds}">
                 <div class="playground_card">

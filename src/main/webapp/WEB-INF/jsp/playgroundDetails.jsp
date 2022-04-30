@@ -165,105 +165,1183 @@
                     <th><fmt:formatDate pattern="d-MMMM" value = "${date[3]}" /> <span><fmt:formatDate pattern="EEEE" value = "${date[3]}" /></span></th>
                     <th><fmt:formatDate pattern="d-MMMM" value = "${date[4]}" /> <span><fmt:formatDate pattern="EEEE" value = "${date[4]}" /></span></th>
                     <th><fmt:formatDate pattern="d-MMMM" value = "${date[5]}" /> <span><fmt:formatDate pattern="EEEE" value = "${date[5]}" /></span></th>
+                    <fmt:formatDate pattern="M" value = "${date[0]}" var="m0" />
+                    <fmt:formatDate pattern="d" value = "${date[0]}" var="d0"/>
+                    <fmt:formatDate pattern="M" value = "${date[1]}" var="m1" />
+                    <fmt:formatDate pattern="d" value = "${date[1]}" var="d1"/>
+                    <fmt:formatDate pattern="M" value = "${date[2]}" var="m2" />
+                    <fmt:formatDate pattern="d" value = "${date[2]}" var="d2"/>
+                    <fmt:formatDate pattern="M" value = "${date[3]}" var="m3" />
+                    <fmt:formatDate pattern="d" value = "${date[3]}" var="d3"/>
+                    <fmt:formatDate pattern="M" value = "${date[4]}" var="m4" />
+                    <fmt:formatDate pattern="d" value = "${date[4]}" var="d4"/>
+                    <fmt:formatDate pattern="M" value = "${date[5]}" var="m5" />
+                    <fmt:formatDate pattern="d" value = "${date[5]}" var="d5"/>
 
 
                     </thead>
                     <tbody>
                     <tr>
                         <td>12:00</td>
-                        <td><div class="tablePrice checked">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="12">
+                            <input type="hidden" name="month" value="${m0}">
+                            <input type="hidden" name="day"  value="${d0}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m0}">
+                                    <c:if test="${booking.getBronDay() == d0}">
+                                        <c:if test="${booking.getBronTime() == 12}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="12">
+                            <input type="hidden" name="month" value="${m1}">
+                            <input type="hidden" name="day"  value="${d1}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m1}">
+                                    <c:if test="${booking.getBronDay() == d1}">
+                                        <c:if test="${booking.getBronTime() == 12}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="12">
+                            <input type="hidden" name="month" value="${m2}">
+                            <input type="hidden" name="day"  value="${d2}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m2}">
+                                    <c:if test="${booking.getBronDay() == d2}">
+                                        <c:if test="${booking.getBronTime() == 12}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="12">
+                            <input type="hidden" name="month" value="${m3}">
+                            <input type="hidden" name="day"  value="${d3}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m3}">
+                                    <c:if test="${booking.getBronDay() == d3}">
+                                        <c:if test="${booking.getBronTime() == 12}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="12">
+                            <input type="hidden" name="month" value="${m4}">
+                            <input type="hidden" name="day"  value="${d4}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m4}">
+                                    <c:if test="${booking.getBronDay() == d4}">
+                                        <c:if test="${booking.getBronTime() == 12}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="12">
+                            <input type="hidden" name="month" value="${m5}">
+                            <input type="hidden" name="day"  value="${d5}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m5}">
+                                    <c:if test="${booking.getBronDay() == d5}">
+                                        <c:if test="${booking.getBronTime() == 12}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
                     </tr>
                     <tr>
                         <td>13:00</td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="13">
+                            <input type="hidden" name="month" value="${m0}">
+                            <input type="hidden" name="day"  value="${d0}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m0}">
+                                    <c:if test="${booking.getBronDay() == d0}">
+                                        <c:if test="${booking.getBronTime() == 13}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="13">
+                            <input type="hidden" name="month" value="${m1}">
+                            <input type="hidden" name="day"  value="${d1}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m1}">
+                                    <c:if test="${booking.getBronDay() == d1}">
+                                        <c:if test="${booking.getBronTime() == 13}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="13">
+                            <input type="hidden" name="month" value="${m2}">
+                            <input type="hidden" name="day"  value="${d2}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m2}">
+                                    <c:if test="${booking.getBronDay() == d2}">
+                                        <c:if test="${booking.getBronTime() == 13}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="13">
+                            <input type="hidden" name="month" value="${m3}">
+                            <input type="hidden" name="day"  value="${d3}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m3}">
+                                    <c:if test="${booking.getBronDay() == d3}">
+                                        <c:if test="${booking.getBronTime() == 13}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="13">
+                            <input type="hidden" name="month" value="${m4}">
+                            <input type="hidden" name="day"  value="${d4}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m4}">
+                                    <c:if test="${booking.getBronDay() == d4}">
+                                        <c:if test="${booking.getBronTime() == 13}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="13">
+                            <input type="hidden" name="month" value="${m5}">
+                            <input type="hidden" name="day"  value="${d5}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m5}">
+                                    <c:if test="${booking.getBronDay() == d5}">
+                                        <c:if test="${booking.getBronTime() == 13}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
                     </tr>
                     <tr>
                         <td>14:00</td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="14">
+                            <input type="hidden" name="month" value="${m0}">
+                            <input type="hidden" name="day"  value="${d0}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m0}">
+                                    <c:if test="${booking.getBronDay() == d0}">
+                                        <c:if test="${booking.getBronTime() == 14}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="14">
+                            <input type="hidden" name="month" value="${m1}">
+                            <input type="hidden" name="day"  value="${d1}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m1}">
+                                    <c:if test="${booking.getBronDay() == d1}">
+                                        <c:if test="${booking.getBronTime() == 14}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="14">
+                            <input type="hidden" name="month" value="${m2}">
+                            <input type="hidden" name="day"  value="${d2}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m2}">
+                                    <c:if test="${booking.getBronDay() == d2}">
+                                        <c:if test="${booking.getBronTime() == 14}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="14">
+                            <input type="hidden" name="month" value="${m3}">
+                            <input type="hidden" name="day"  value="${d3}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m3}">
+                                    <c:if test="${booking.getBronDay() == d3}">
+                                        <c:if test="${booking.getBronTime() == 14}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="14">
+                            <input type="hidden" name="month" value="${m4}">
+                            <input type="hidden" name="day"  value="${d4}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m4}">
+                                    <c:if test="${booking.getBronDay() == d4}">
+                                        <c:if test="${booking.getBronTime() == 14}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="14">
+                            <input type="hidden" name="month" value="${m5}">
+                            <input type="hidden" name="day"  value="${d5}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m5}">
+                                    <c:if test="${booking.getBronDay() == d5}">
+                                        <c:if test="${booking.getBronTime() == 14}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
                     </tr>
-                    <tr>
                         <td>15:00</td>
-                        <td><div class="tablePrice checked">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="15">
+                        <input type="hidden" name="month" value="${m0}">
+                        <input type="hidden" name="day"  value="${d0}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m0}">
+                                <c:if test="${booking.getBronDay() == d0}">
+                                    <c:if test="${booking.getBronTime() == 15}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="15">
+                        <input type="hidden" name="month" value="${m1}">
+                        <input type="hidden" name="day"  value="${d1}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m1}">
+                                <c:if test="${booking.getBronDay() == d1}">
+                                    <c:if test="${booking.getBronTime() == 15}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="15">
+                        <input type="hidden" name="month" value="${m2}">
+                        <input type="hidden" name="day"  value="${d2}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m2}">
+                                <c:if test="${booking.getBronDay() == d2}">
+                                    <c:if test="${booking.getBronTime() == 15}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="15">
+                        <input type="hidden" name="month" value="${m3}">
+                        <input type="hidden" name="day"  value="${d3}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m3}">
+                                <c:if test="${booking.getBronDay() == d3}">
+                                    <c:if test="${booking.getBronTime() == 15}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="15">
+                        <input type="hidden" name="month" value="${m4}">
+                        <input type="hidden" name="day"  value="${d4}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m4}">
+                                <c:if test="${booking.getBronDay() == d4}">
+                                    <c:if test="${booking.getBronTime() == 15}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="15">
+                        <input type="hidden" name="month" value="${m5}">
+                        <input type="hidden" name="day"  value="${d5}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m5}">
+                                <c:if test="${booking.getBronDay() == d5}">
+                                    <c:if test="${booking.getBronTime() == 15}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
                     </tr>
-                    <tr>
                         <td>16:00</td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice checked">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="16">
+                        <input type="hidden" name="month" value="${m0}">
+                        <input type="hidden" name="day"  value="${d0}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m0}">
+                                <c:if test="${booking.getBronDay() == d0}">
+                                    <c:if test="${booking.getBronTime() == 16}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="16">
+                        <input type="hidden" name="month" value="${m1}">
+                        <input type="hidden" name="day"  value="${d1}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m1}">
+                                <c:if test="${booking.getBronDay() == d1}">
+                                    <c:if test="${booking.getBronTime() == 16}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="16">
+                        <input type="hidden" name="month" value="${m2}">
+                        <input type="hidden" name="day"  value="${d2}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m2}">
+                                <c:if test="${booking.getBronDay() == d2}">
+                                    <c:if test="${booking.getBronTime() == 16}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="16">
+                        <input type="hidden" name="month" value="${m3}">
+                        <input type="hidden" name="day"  value="${d3}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m3}">
+                                <c:if test="${booking.getBronDay() == d3}">
+                                    <c:if test="${booking.getBronTime() == 16}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="16">
+                        <input type="hidden" name="month" value="${m4}">
+                        <input type="hidden" name="day"  value="${d4}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m4}">
+                                <c:if test="${booking.getBronDay() == d4}">
+                                    <c:if test="${booking.getBronTime() == 16}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="16">
+                        <input type="hidden" name="month" value="${m5}">
+                        <input type="hidden" name="day"  value="${d5}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m5}">
+                                <c:if test="${booking.getBronDay() == d5}">
+                                    <c:if test="${booking.getBronTime() == 16}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
                     </tr>
-                    <tr>
                         <td>17:00</td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice checked">3000 ТГ</div></td>
-                        <td><div class="tablePrice disabled">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="17">
+                        <input type="hidden" name="month" value="${m0}">
+                        <input type="hidden" name="day"  value="${d0}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m0}">
+                                <c:if test="${booking.getBronDay() == d0}">
+                                    <c:if test="${booking.getBronTime() == 17}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="17">
+                        <input type="hidden" name="month" value="${m1}">
+                        <input type="hidden" name="day"  value="${d1}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m1}">
+                                <c:if test="${booking.getBronDay() == d1}">
+                                    <c:if test="${booking.getBronTime() == 17}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="17">
+                        <input type="hidden" name="month" value="${m2}">
+                        <input type="hidden" name="day"  value="${d2}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m2}">
+                                <c:if test="${booking.getBronDay() == d2}">
+                                    <c:if test="${booking.getBronTime() == 17}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="17">
+                        <input type="hidden" name="month" value="${m3}">
+                        <input type="hidden" name="day"  value="${d3}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m3}">
+                                <c:if test="${booking.getBronDay() == d3}">
+                                    <c:if test="${booking.getBronTime() == 17}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="17">
+                        <input type="hidden" name="month" value="${m4}">
+                        <input type="hidden" name="day"  value="${d4}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m4}">
+                                <c:if test="${booking.getBronDay() == d4}">
+                                    <c:if test="${booking.getBronTime() == 17}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="17">
+                        <input type="hidden" name="month" value="${m5}">
+                        <input type="hidden" name="day"  value="${d5}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m5}">
+                                <c:if test="${booking.getBronDay() == d5}">
+                                    <c:if test="${booking.getBronTime() == 17}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    </tr>
+                        <td>18:00</td>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="18">
+                        <input type="hidden" name="month" value="${m0}">
+                        <input type="hidden" name="day"  value="${d0}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m0}">
+                                <c:if test="${booking.getBronDay() == d0}">
+                                    <c:if test="${booking.getBronTime() == 18}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="18">
+                        <input type="hidden" name="month" value="${m1}">
+                        <input type="hidden" name="day"  value="${d1}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m1}">
+                                <c:if test="${booking.getBronDay() == d1}">
+                                    <c:if test="${booking.getBronTime() == 18}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="18">
+                        <input type="hidden" name="month" value="${m2}">
+                        <input type="hidden" name="day"  value="${d2}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m2}">
+                                <c:if test="${booking.getBronDay() == d2}">
+                                    <c:if test="${booking.getBronTime() == 18}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="18">
+                        <input type="hidden" name="month" value="${m3}">
+                        <input type="hidden" name="day"  value="${d3}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m3}">
+                                <c:if test="${booking.getBronDay() == d3}">
+                                    <c:if test="${booking.getBronTime() == 18}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="18">
+                        <input type="hidden" name="month" value="${m4}">
+                        <input type="hidden" name="day"  value="${d4}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m4}">
+                                <c:if test="${booking.getBronDay() == d4}">
+                                    <c:if test="${booking.getBronTime() == 18}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="18">
+                        <input type="hidden" name="month" value="${m5}">
+                        <input type="hidden" name="day"  value="${d5}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m5}">
+                                <c:if test="${booking.getBronDay() == d5}">
+                                    <c:if test="${booking.getBronTime() == 18}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
                     </tr>
                     <tr>
-                        <td>18:00</td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
-                        <td><div class="tablePrice">3000 ТГ</div></td>
+                        <td>19:00</td>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="19">
+                            <input type="hidden" name="month" value="${m0}">
+                            <input type="hidden" name="day"  value="${d0}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m0}">
+                                    <c:if test="${booking.getBronDay() == d0}">
+                                        <c:if test="${booking.getBronTime() == 19}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="19">
+                            <input type="hidden" name="month" value="${m1}">
+                            <input type="hidden" name="day"  value="${d1}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m1}">
+                                    <c:if test="${booking.getBronDay() == d1}">
+                                        <c:if test="${booking.getBronTime() == 19}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="19">
+                            <input type="hidden" name="month" value="${m2}">
+                            <input type="hidden" name="day"  value="${d2}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m2}">
+                                    <c:if test="${booking.getBronDay() == d2}">
+                                        <c:if test="${booking.getBronTime() == 19}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="19">
+                            <input type="hidden" name="month" value="${m3}">
+                            <input type="hidden" name="day"  value="${d3}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m3}">
+                                    <c:if test="${booking.getBronDay() == d3}">
+                                        <c:if test="${booking.getBronTime() == 19}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="19">
+                            <input type="hidden" name="month" value="${m4}">
+                            <input type="hidden" name="day"  value="${d4}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m4}">
+                                    <c:if test="${booking.getBronDay() == d4}">
+                                        <c:if test="${booking.getBronTime() == 19}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                        <form action="/booking">
+                            <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                            <input type="hidden" name="time" value="19">
+                            <input type="hidden" name="month" value="${m5}">
+                            <input type="hidden" name="day"  value="${d5}">
+                            <c:set var="bool" value="true"/>
+                            <c:forEach var="booking" items="${bookingList}">
+                                <c:if test="${booking.getBronMonth() == m5}">
+                                    <c:if test="${booking.getBronDay() == d5}">
+                                        <c:if test="${booking.getBronTime() == 19}">
+                                            <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                            <c:set var="bool" value="false"/>
+                                        </c:if>
+                                    </c:if>
+                                </c:if>
+                            </c:forEach>
+                            <c:if test="${bool eq 'true'}">
+                                <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                                <c:set var="bool" value="false"/>
+                            </c:if>
+                        </form>
+                    </tr>
+                        <td>20:00</td>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="20">
+                        <input type="hidden" name="month" value="${m0}">
+                        <input type="hidden" name="day"  value="${d0}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m0}">
+                                <c:if test="${booking.getBronDay() == d0}">
+                                    <c:if test="${booking.getBronTime() == 20}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="20">
+                        <input type="hidden" name="month" value="${m1}">
+                        <input type="hidden" name="day"  value="${d1}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m1}">
+                                <c:if test="${booking.getBronDay() == d1}">
+                                    <c:if test="${booking.getBronTime() == 20}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="20">
+                        <input type="hidden" name="month" value="${m2}">
+                        <input type="hidden" name="day"  value="${d2}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m2}">
+                                <c:if test="${booking.getBronDay() == d2}">
+                                    <c:if test="${booking.getBronTime() == 20}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="20">
+                        <input type="hidden" name="month" value="${m3}">
+                        <input type="hidden" name="day"  value="${d3}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m3}">
+                                <c:if test="${booking.getBronDay() == d3}">
+                                    <c:if test="${booking.getBronTime() == 20}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="20">
+                        <input type="hidden" name="month" value="${m4}">
+                        <input type="hidden" name="day"  value="${d4}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m4}">
+                                <c:if test="${booking.getBronDay() == d4}">
+                                    <c:if test="${booking.getBronTime() == 20}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
+                    <form action="/booking">
+                        <input type="hidden" name="id" value="${playgroundDetails.getId()}">
+                        <input type="hidden" name="time" value="20">
+                        <input type="hidden" name="month" value="${m5}">
+                        <input type="hidden" name="day"  value="${d5}">
+                        <c:set var="bool" value="true"/>
+                        <c:forEach var="booking" items="${bookingList}">
+                            <c:if test="${booking.getBronMonth() == m5}">
+                                <c:if test="${booking.getBronDay() == d5}">
+                                    <c:if test="${booking.getBronTime() == 20}">
+                                        <td><div class="tablePrice disabled"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</div></td>
+                                        <c:set var="bool" value="false"/>
+                                    </c:if>
+                                </c:if>
+                            </c:if>
+                        </c:forEach>
+                        <c:if test="${bool eq 'true'}">
+                            <td><button class="brn"><c:out value="${playgroundDetails.getPrice()}" /> ТГ</button></td>
+                            <c:set var="bool" value="false"/>
+                        </c:if>
+                    </form>
                     </tr>
 
                     </tbody>
                 </table>
                 <hr/>
-                <div class="chosen_section">
-                    <div class="chosen_row">
-                        <div class="chosen_date">20 февраля <span>сегодня</span></div>
-                        <div class="chosen_time">с 12 :00 по 13:00</div>
-                        <div class="chosen_section_price">3000 тг</div>
-                        <div class="cancel_button">
-                            <button class="cancel">Отменить</button>
-                        </div>
-                    </div>
-                    <div class="chosen_row">
-                        <div class="chosen_date">21 февраля пт</div>
-                        <div class="chosen_time">с 12 :00 по 13:00</div>
-                        <div class="chosen_section_price">3000 тг</div>
-                        <div class="cancel_button">
-                            <button class="cancel">Отменить</button>
-                        </div>
-                    </div>
-                    <div class="total_info">
-                        <div class="totalPrice">
-                            Итого : <span>6000 тг</span>
-                        </div>
-                        <div class="booking_button">
-                            <button>
-                                Забронировать
-                            </button>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
